@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo "[INFO] Running pre-commit checks..."
+
+if ! make fmt_check; then
+    echo "[X] Formatting check failed."
+    echo "[INFO] Run: make fmt"
+    exit 1
+fi
+
+if ! make typecheck; then
+    echo "[X] Typecheck failed."
+    exit 1
+fi
+
+echo "[OK] Pre-commit checks passed"
