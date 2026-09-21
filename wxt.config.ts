@@ -9,7 +9,7 @@ export default defineConfig({
     permissions: ["bookmarks", "storage", "downloads"],
     browser_specific_settings: {
       gecko: {
-        id: "37869f2f-9e8d-4d6d-8abc-71ec36ad91a9-kosh",
+        id: "{607ea70f-8edf-4298-8ec3-ea614c2b45eb}",
         data_collection_permissions: {
           required: ["none"],
         },
