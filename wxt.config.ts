@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   modules: ["@wxt-dev/module-react"],
   manifest: {
+    name: "kosh: Bookmark Manager",
     permissions: ["bookmarks", "storage", "downloads"],
     browser_specific_settings: {
       gecko: {
