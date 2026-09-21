@@ -1,5 +1,7 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 
+import useTheme from "@/hooks/useTheme";
+
 import About from "./pages/About";
 import Settings from "./pages/Settings";
 import Dashboard from "./pages/Dashboard";

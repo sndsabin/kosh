@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { LayoutGrid, List, Moon, Search, Sun } from "lucide-react";
 
 import { useDashboardStore } from "../store/dashboardStore";

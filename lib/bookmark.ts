@@ -2,6 +2,7 @@ import { browser } from "wxt/browser";
 
 import { getColor } from "./color";
 
+import type { Browser } from "#imports";
 import type { Bookmark, Folder, FolderTreeNode } from "@/types";
 
 export async function getBookmarks() {

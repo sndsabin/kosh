@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Check, Copy, Trash2 } from "lucide-react";
 
 import { getColor } from "@/lib/color";

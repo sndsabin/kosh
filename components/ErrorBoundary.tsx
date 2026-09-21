@@ -1,4 +1,5 @@
 import { Component, type ReactNode } from "react";
+
 import ErrorScreen from "./ErrorScreen";
 
 interface Props {

@@ -1,5 +1,6 @@
 import { browser } from "wxt/browser";
 import { escapeHtml, formatDate, msToSec } from "./formatter";
+import type { Browser } from "#imports";
 
 const CRLF = "\r\n";
 

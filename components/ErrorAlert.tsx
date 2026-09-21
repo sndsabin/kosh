@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { CircleAlert } from "lucide-react";
 
 interface Props {

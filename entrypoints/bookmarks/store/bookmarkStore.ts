@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { browser } from "wxt/browser";
 
 import {
   moveFolder,
@@ -48,7 +49,6 @@ export const refreshBookmarkData = () => {
 };
 
 export const useBookmarkStore = create<BookmarkState>()((set, get) => ({
-  error: null,
   folders: [],
   bookmarks: [],
   isImporting: false,
