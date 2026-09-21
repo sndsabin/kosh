@@ -25,8 +25,10 @@ fmt:
 # check formatting
 fmt_check:
 	@echo "[INFO] Checking formatting..."
-	npm run format:check || (echo "[X] Frontend files are not formatted. Run 'make fmt'"; exit 1)
-
+	@if ! npm run format:check; then \
+		echo "[X] Frontend files are not formatted. Run 'make fmt'"; \
+		exit 1; \
+	fi
 	@echo "[OK] Formatting OK!"
 
 # run typecheck
