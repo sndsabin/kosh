@@ -79,12 +79,22 @@ jobs:
 
         shell: bash
 
+      # ----- Copy build -----
+      - name: Copy build
+        shell: bash
+        run: |
+          mkdir -p staging
+          cp -v .output/*.zip staging/
+
+          echo "Staging assets:"
+          ls -lah staging
+
       # ----- Upload Artifacts -----
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: staging
-          path: ${{ github.workspace }}/.output/
+          name: artifacts
+          path: staging/
           if-no-files-found: error
 
   release:
