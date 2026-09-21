@@ -1,0 +1,124 @@
+name: Build and package kosh extension
+
+on:
+  push:
+    tags:
+      - "v*" # Trigger on version tags (e.g., 1.0.0)
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag to build (e.g., 0.1.0)"
+        required: true
+        type: string
+
+env:
+  NODE_OPTIONS: "--max-old-space-size=4096"
+  IS_GITHUB_RELEASE_TRIGGER_EVENT: &is_github_release_trigger_event "github.event_name == 'push' || github.event_name == 'workflow_dispatch'"
+
+permissions:
+  contents: write # for creating GitHub Releases
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.VERSION }}
+
+    env:
+      IS_GITHUB_PUSH_EVENT: ${{ github.event_name == 'push' }}
+      IS_GITHUB_WORKFLOW_DISPATCH_EVENT: ${{ github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        shell: bash
+
+      # ----- Determine Version (from workflow_action input or tag) -----
+      - name: Set version variable
+        id: version
+        run: |
+          if [ "${IS_GITHUB_WORKFLOW_DISPATCH_EVENT}" = "true" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else 
+            VERSION=${GITHUB_REF_NAME}
+          fi
+
+          VERSION="${VERSION#v}" # e.g -> v0.0.1 -> 0.0.1
+
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      # ----- Inject version into package.json -----
+      - name: Inject version
+        run: |
+
+          # Use jq to update only the version field and save it back
+          echo "Setting version to: $VERSION"
+          jq --arg v "$VERSION" '.version = $v' package.json > package.tmp.json && mv package.tmp.json package.json
+        shell: bash
+
+      # ----- Build Step -----
+      - name: Build Extension
+        run: |
+          rm -rf .output/   # clean builds if any
+          npm run zip
+          npm run zip:firefox
+
+        shell: bash
+
+      # ----- Upload Artifacts -----
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: staging
+          path: ${{ github.workspace }}/.output/
+          if-no-files-found: error
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    if: *is_github_release_trigger_event
+    runs-on: ubuntu-latest
+
+    env:
+      IS_GITHUB_PUSH_EVENT: ${{ github.event_name == 'push' }}
+      IS_GITHUB_WORKFLOW_DISPATCH_EVENT: ${{ github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v8
+        with:
+          path: release-assets
+
+      - name: Determine release tag
+        id: tag
+        run: |
+          if [ "${IS_GITHUB_WORKFLOW_DISPATCH_EVENT}" = "true" ]; then
+            TAG="${{ github.event.inputs.version }}"
+            [[ "$TAG" != v* ]] && TAG="v$TAG"
+          else
+            TAG="${{ github.ref_name }}"
+          fi
+          echo "TAG=${TAG}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.tag.outputs.TAG }}
+          name: ${{ steps.tag.outputs.TAG }}
+          files: release-assets/*
+          generate_release_notes: true
