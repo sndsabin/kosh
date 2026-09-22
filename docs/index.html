@@ -19,56 +19,32 @@
       rel="stylesheet"
     />
 
-    <style>
-      html {
-        visibility: hidden;
+    <style type="text/tailwindcss">
+      @theme {
+        --color-ink-950: #0e0f11;
+        --color-ink-900: #141518;
+        --color-ink-800: #1b1d21;
+        --color-ink-700: #26282d;
+        --color-ink-600: #34373e;
+
+        --color-paper: #f6f4ef;
+
+        --color-brass: #4fa8da;
+        --color-brass-dim: #2e6e93;
+
+        --color-moss: #7bae7f;
+
+        --font-serif: "Newsreader", ui-serif, Georgia, serif;
+        --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+        --font-mono:
+          "IBM Plex Mono", "Noto Sans Devanagari", ui-monospace, "SFMono-Regular", monospace;
       }
-    </style>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <script>
-      requestAnimationFrame(() => {
-        document.documentElement.style.visibility = "visible";
-      });
-
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              ink: {
-                950: "#0E0F11",
-                900: "#141518",
-                800: "#1B1D21",
-                700: "#26282D",
-                600: "#34373E",
-              },
-              paper: "#F6F4EF",
-              brass: {
-                DEFAULT: "#4FA8DA",
-                dim: "#2E6E93",
-              },
-              moss: "#7BAE7F",
-            },
-            fontFamily: {
-              serif: ["Newsreader", "ui-serif", "Georgia", "serif"],
-              sans: ['"IBM Plex Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
-              mono: [
-                '"IBM Plex Mono"',
-                '"Noto Sans Devanagari"',
-                "ui-monospace",
-                "SFMono-Regular",
-                "monospace",
-              ],
-            },
-          },
-        },
-      };
-    </script>
-
-    <style>
       :root {
         color-scheme: dark;
+      }
+      html {
+        visibility: hidden;
       }
       html,
       body {
@@ -116,6 +92,15 @@
         }
       }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <script type="text/javascript">
+      requestAnimationFrame(() => {
+        // only make it visible after tailwind loads
+        document.documentElement.style.visibility = "visible";
+      });
+    </script>
   </head>
 
   <body
