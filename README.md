@@ -2,6 +2,16 @@
   <img src="docs/logo.png" alt="Pal logo" width="150" />
 </p>
 
+<p align="center">
+  <a href="https://chromewebstore.google.com/detail/kosh-bookmark-manager/meldjdfnfgefeoegccphimkmgmeamcce">
+    <img src="https://img.shields.io/badge/Chrome%20Web%20Store-Available-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available on Chrome Web Store">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/kosh/">
+    <img src="https://img.shields.io/badge/Firefox-Coming%20Soon-FF7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white" alt="Kosh for Firefox - Coming Soon">
+  </a>
+</p>
+
 # kosh
 
 **kosh (कोष)**, Nepali for “collection” or “repository”, is a browser bookmark manager that helps you save, organize, tag, and quickly find your favorite web pages. It works with your browser’s native bookmarks, offering a focused interface for organizing large collections without migrating to a separate service.
