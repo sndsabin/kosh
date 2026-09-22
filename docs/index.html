@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
       rel="stylesheet"
     />
 
@@ -53,7 +53,13 @@
             fontFamily: {
               serif: ["Newsreader", "ui-serif", "Georgia", "serif"],
               sans: ['"IBM Plex Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
-              mono: ['"IBM Plex Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
+              mono: [
+                '"IBM Plex Mono"',
+                '"Noto Sans Devanagari"',
+                "ui-monospace",
+                "SFMono-Regular",
+                "monospace",
+              ],
             },
           },
         },
@@ -71,6 +77,11 @@
       body {
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
+      }
+      .nepali {
+        font-family: "Noto Sans Devanagari", sans-serif;
+        font-weight: 400;
+        font-style: normal;
       }
       .hairline {
         border-color: #26282d;
@@ -143,7 +154,8 @@
         >
           <div class="rise">
             <p class="text-brass mb-5 font-mono text-[12.5px] tracking-wide">
-              कोष &nbsp;/&nbsp; noun &nbsp;— &nbsp;collection, treasury, repository
+              <span lang="ne" class="nepali">कोष</span> &nbsp;/&nbsp; noun &nbsp;— &nbsp;collection,
+              treasury, repository
             </p>
 
             <h1
@@ -300,7 +312,9 @@
           class="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-20 sm:flex-row sm:items-end sm:justify-between"
         >
           <div>
-            <p class="text-brass mb-3 font-mono text-[12.5px] tracking-wide">kosh (कोष)</p>
+            <p class="text-brass mb-3 font-mono text-[12.5px] tracking-wide">
+              kosh (<span lang="ne" class="nepali">कोष</span>)
+            </p>
             <h2 class="max-w-md font-serif text-[2rem] leading-tight text-white">
               Give your bookmarks a shape worth keeping.
             </h2>
