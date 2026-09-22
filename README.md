@@ -6,7 +6,7 @@
 
 **kosh (कोष)**, Nepali for “collection” or “repository”, is a browser bookmark manager that helps you save, organize, tag, and quickly find your favorite web pages. It works with your browser’s native bookmarks, offering a focused interface for organizing large collections without migrating to a separate service.
 
-![Demo](docs/demo.gif)
+![Demo](docs/kosh-dashboard.png)
 
 ## Tech Stack
 
