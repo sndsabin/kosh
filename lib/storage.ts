@@ -9,7 +9,13 @@ const BANNER_STORAGE_KEY = "local:koshBanner";
 export async function getTheme() {
   const theme = await storage.getItem(THEME_STORAGE_KEY);
 
-  return theme === THEME_MODE_DARK ? THEME_MODE_DARK : THEME_MODE_LIGHT;
+  if (theme) {
+    return theme === THEME_MODE_DARK ? THEME_MODE_DARK : THEME_MODE_LIGHT;
+  } else {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? THEME_MODE_DARK
+      : THEME_MODE_LIGHT;
+  }
 }
 
 export async function setTheme(theme: Theme) {
