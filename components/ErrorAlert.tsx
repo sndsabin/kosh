@@ -12,6 +12,8 @@ const ErrorAlert = ({ message, className = "" }: Props) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
+    setIsVisible(true);
+
     const timer = setTimeout(() => {
       setIsVisible(false);
     }, TIME_DELAY);
