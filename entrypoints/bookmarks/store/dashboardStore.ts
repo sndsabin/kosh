@@ -34,7 +34,7 @@ export const useDashboardStore = create<DashboardState>()((set) => ({
   },
 
   setError: (err: string | null) => set({ error: err }),
-  setQuery: (query: string) => set({ query: query.trim() }),
+  setQuery: (query: string) => set({ query: query }),
   setViewMode: (mode: ViewMode) => set({ viewMode: mode }),
   setSortMode: (mode: SortMode) => set({ sortMode: mode }),
   setSelectedFolder: (id: string, name: string) => set({ selectedFolder: { id: id, name: name } }),
