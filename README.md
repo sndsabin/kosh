@@ -8,7 +8,7 @@
   </a>
   &nbsp;&nbsp;
   <a href="https://addons.mozilla.org/en-US/firefox/addon/kosh/">
-    <img src="https://img.shields.io/badge/Firefox-Coming%20Soon-FF7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white" alt="Kosh for Firefox - Coming Soon">
+    <img src="https://img.shields.io/badge/Firefox-Available-FF7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white" alt="Available on Firefox Addons store">
   </a>
 </p>
 
