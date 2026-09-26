@@ -16,7 +16,7 @@
 
 **kosh (कोष)**, Nepali for “collection” or “repository”, is a modern, clean, and lightweight UI for your browser’s built-in bookmark manager.
 
-It gives your existing bookmarks a fresh interface designed to make browsing and organizing them feel simpler and more intuitive. Kosh works with your browser’s native bookmarks, so you don’t need to migrate or manage a separate bookmark collection.
+It gives your existing bookmarks a fresh interface designed to make browsing and organizing them feel simpler and more intuitive. kosh works with your browser’s native bookmarks, so you don’t need to migrate or manage a separate bookmark collection.
 
 ![Demo](docs/kosh-dashboard.png)
 
