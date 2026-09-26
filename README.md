@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/logo.png" alt="Pal logo" width="150" />
+  <img src="docs/logo.png" alt="kosh logo" width="150" />
 </p>
 
 <p align="center">
@@ -14,7 +14,9 @@
 
 # kosh
 
-**kosh (कोष)**, Nepali for “collection” or “repository”, is a browser bookmark manager that helps you save, organize, tag, and quickly find your favorite web pages. It works with your browser’s native bookmarks, offering a focused interface for organizing large collections without migrating to a separate service.
+**kosh (कोष)**, Nepali for “collection” or “repository”, is a modern, clean, and lightweight UI for your browser’s built-in bookmark manager.
+
+It gives your existing bookmarks a fresh interface designed to make browsing and organizing them feel simpler and more intuitive. Kosh works with your browser’s native bookmarks, so you don’t need to migrate or manage a separate bookmark collection.
 
 ![Demo](docs/kosh-dashboard.png)
 
