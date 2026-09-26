@@ -23,6 +23,7 @@ const Sidebar = ({ title }: Props) => {
 
   const selectedFolder = useDashboardStore((state) => state.selectedFolder);
   const setSelectedFolder = useDashboardStore((state) => state.setSelectedFolder);
+  const isOpen = useDashboardStore((state) => state.isSidebarOpen);
 
   const folderTreeNode = useMemo(() => {
     return buildFolderTree(folders);
@@ -35,7 +36,9 @@ const Sidebar = ({ title }: Props) => {
   const duplicateCount = duplicates.length;
 
   return (
-    <aside className="border-surface-border bg-surface-alt dark:border-night-border dark:bg-night-surface flex h-full w-84 shrink-0 flex-col justify-between border-r px-3 py-4">
+    <aside
+      className={`border-surface-border bg-surface-alt dark:border-night-border dark:bg-night-surface flex h-full w-84 shrink-0 flex-col justify-between border-r px-3 py-4 ${isOpen ? "" : "hidden"}`}
+    >
       <div className="min-w-0">
         <div className="flex items-center gap-2 px-2 pb-6">
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg">
