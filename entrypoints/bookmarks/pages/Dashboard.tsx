@@ -1,9 +1,13 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import { useBookmarkStore } from "../store/bookmarkStore";
 import { useDashboardStore } from "../store/dashboardStore";
 
 import { getAppName } from "@/lib/info";
 
 import useBanner from "@/hooks/useBanner";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
@@ -11,21 +15,24 @@ import ErrorAlert from "@/components/ErrorAlert";
 import BookmarkLayout from "../components/BookmarkLayout";
 
 import type { Theme } from "@/types";
-import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 interface Props {
   theme: Theme;
   onToggleTheme: () => void;
 }
 
+const SIDEBAR_BREAKPOINT = 1024;
+
 const Dashboard = ({ theme, onToggleTheme }: Props) => {
   const location = useLocation();
   const { showBanner } = useBanner();
+  const isWideEnough = useMediaQuery(`(min-width: ${SIDEBAR_BREAKPOINT}px)`);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const error = useDashboardStore((state) => state.error);
   const setError = useDashboardStore((state) => state.setError);
+  const setIsSidebarOpen = useDashboardStore((state) => state.setIsSidebarOpen);
 
   const initializeBookmarks = useBookmarkStore((state) => state.initalize);
 
@@ -43,6 +50,10 @@ const Dashboard = ({ theme, onToggleTheme }: Props) => {
   useEffect(() => {
     setError(null);
   }, [location.key]);
+
+  useEffect(() => {
+    setIsSidebarOpen(isWideEnough);
+  }, [isWideEnough]);
 
   return (
     <div className="flex h-screen w-full overflow-hidden">

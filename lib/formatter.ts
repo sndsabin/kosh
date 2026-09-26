@@ -1,3 +1,5 @@
+import { ALL_BOOKMARKS_FOLDER, DUPLICATES_FOLDER } from "@/constants";
+
 const dateFromater = new Intl.DateTimeFormat(undefined, {
   month: "short",
   day: "numeric",
@@ -5,7 +7,14 @@ const dateFromater = new Intl.DateTimeFormat(undefined, {
 });
 
 export function formatTitle(title: string): string {
-  return title.replace(/[_]/g, " ");
+  switch (title) {
+    case ALL_BOOKMARKS_FOLDER:
+      return "All Bookmarks";
+    case DUPLICATES_FOLDER:
+      return "Duplicates";
+    default:
+      return title;
+  }
 }
 
 export function formatDate(timestamp: number): string {

@@ -1,9 +1,12 @@
 import { useMemo } from "react";
-import { LayoutGrid, List, Moon, Search, Sun } from "lucide-react";
+import { LayoutGrid, List, Menu, Moon, Search, Sun, X } from "lucide-react";
 
 import { useDashboardStore } from "../store/dashboardStore";
 
+import { formatTitle } from "@/lib/formatter";
+
 import ViewButton from "./ViewButton";
+import IconButton from "./IconButton";
 
 import {
   SORT_MODE_ALPHABETIC,
@@ -15,7 +18,6 @@ import {
 } from "@/constants";
 
 import type { SortMode, Theme } from "@/types";
-import { formatTitle } from "@/lib/formatter";
 
 interface Props {
   theme: Theme;
@@ -30,6 +32,8 @@ const Header = ({ theme, onToggleTheme }: Props) => {
   const viewMode = useDashboardStore((state) => state.viewMode);
   const setViewMode = useDashboardStore((state) => state.setViewMode);
   const selectedFolderName = useDashboardStore((state) => state.selectedFolder.name);
+  const isSidebarOpen = useDashboardStore((state) => state.isSidebarOpen);
+  const toggleSidebar = useDashboardStore((state) => state.toggleSidebar);
 
   const title = useMemo(() => {
     return formatTitle(selectedFolderName);
@@ -37,6 +41,14 @@ const Header = ({ theme, onToggleTheme }: Props) => {
 
   return (
     <header className="border-surface-border dark:border-night-border flex flex-wrap items-center gap-3 border-b px-6 py-4">
+      <IconButton
+        onClick={toggleSidebar}
+        className="text-ink-muted hover:bg-ink/5 hover:text-ink dark:text-paper-muted dark:hover:text-paper mr-2 rounded-lg p-2 transition-colors dark:hover:bg-white/5"
+        title={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
+      >
+        {isSidebarOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
+      </IconButton>
+
       <h1 className="shrink-0 text-lg font-semibold tracking-tight">{title}</h1>
 
       <div className="relative ml-auto max-w-md flex-1">
