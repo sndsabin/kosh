@@ -1,6 +1,6 @@
 {
   "name": "kosh",
-  "description": "Bookmark manager to save, organize, tag, and quickly find your favorite web pages.",
+  "description": "Modern, clean, and lightweight UI for your browser’s built-in bookmark manager.",
   "private": true,
   "version": "0.0.4",
   "type": "module",
