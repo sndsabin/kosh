@@ -1,16 +1,15 @@
 import { create } from "zustand";
 import { browser } from "wxt/browser";
 
+import { getBookmarks, moveBookmark, deleteBookmark } from "@/lib/bookmark";
+
 import {
   moveFolder,
   createFolder,
   removeFolder,
   renameFolder,
-  getBookmarks,
-  moveBookmark,
-  deleteBookmark,
   getFolderSubtreeIds,
-} from "@/lib/bookmark";
+} from "@/lib/folder";
 
 import { type Folder, type Bookmark } from "@/types";
 import { getColor } from "@/lib/color";
