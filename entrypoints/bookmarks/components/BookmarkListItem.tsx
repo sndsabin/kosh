@@ -5,6 +5,8 @@ import { getFaviconUrl } from "@/lib/image";
 import { formatDate } from "@/lib/formatter";
 import { getDomainLabel, getHostName } from "@/lib/url";
 
+import FolderPath from "./FolderPath";
+
 import { DRAG_TYPE_BOOKMARK } from "@/constants";
 
 import type { Bookmark } from "@/types";
@@ -14,6 +16,7 @@ interface Props {
   copied: boolean;
   selected: boolean;
   duplicate: boolean;
+  showFolderPath: boolean;
   onDelete: (id: string) => void;
   onCopy: (bookmark: Bookmark) => void;
   onToggleSelect: (id: string) => void;
@@ -24,6 +27,7 @@ const BookmarkListItem = ({
   copied,
   selected,
   duplicate,
+  showFolderPath,
   onDelete,
   onCopy,
   onToggleSelect,
@@ -60,6 +64,14 @@ const BookmarkListItem = ({
       <span className="text-ink group-hover:text-accent-strong dark:text-paper dark:group-hover:text-accent-light min-w-0 flex-1 truncate text-sm">
         {bookmark.title}
       </span>
+
+      {showFolderPath && (
+        <FolderPath
+          folderId={bookmark.folderId}
+          className="text-ink-muted dark:text-paper-muted hidden max-w-56 shrink-0 text-xs 2xl:flex"
+        />
+      )}
+
       {duplicate && (
         <span className="hidden shrink-0 rounded-full bg-amber-500/15 px-2 py-0.5 text-[11px] font-medium text-amber-600 sm:block dark:text-amber-400">
           Duplicate

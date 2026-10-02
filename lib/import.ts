@@ -1,4 +1,5 @@
-import { createBookmark, createFolder } from "./bookmark";
+import { createFolder } from "./folder";
+import { createBookmark } from "./bookmark";
 
 const NODE_BOOKMARK = "bookmark";
 const NODE_FOLDER = "folder";

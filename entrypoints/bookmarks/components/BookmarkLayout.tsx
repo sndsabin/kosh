@@ -4,7 +4,7 @@ import { Bookmark as BookmarkIcon, Trash2, X } from "lucide-react";
 import { useBookmarkStore } from "../store/bookmarkStore";
 import { useDashboardStore } from "../store/dashboardStore";
 
-import { findDuplicates } from "@/lib/bookmark";
+import { findDuplicates, getBookmarksByFolder } from "@/lib/bookmark";
 
 import Pagination from "./Pagination";
 import BookmarkCard from "./BookmarkCard";
@@ -86,19 +86,7 @@ const BookmarkLayout = () => {
   };
 
   const bookmarksByFolder = useMemo(() => {
-    const bookmarkMap = new Map<string, Bookmark[]>();
-
-    bookmarksData.forEach((bookmark) => {
-      const item = bookmarkMap.get(bookmark.folderId);
-
-      if (item) {
-        item.push(bookmark);
-      } else {
-        bookmarkMap.set(bookmark.folderId, [bookmark]);
-      }
-    });
-
-    return bookmarkMap;
+    return getBookmarksByFolder(bookmarksData);
   }, [bookmarksData]);
 
   const filtered = useMemo(() => {
@@ -164,6 +152,8 @@ const BookmarkLayout = () => {
       return selectedBookmarkIds;
     });
   };
+
+  const showFolderPath = [ALL_BOOKMARKS_FOLDER, DUPLICATES_FOLDER].includes(selectedFolder.id);
 
   useEffect(() => {
     setSelectedBookmarkIds(new Set()); // reset select bookmark ids
@@ -234,6 +224,7 @@ const BookmarkLayout = () => {
                 copied={copiedBookmarkId === bookmark.id}
                 selected={selectedBookmarkIds.has(bookmark.id)}
                 duplicate={duplicatesIds.has(bookmark.id)}
+                showFolderPath={showFolderPath}
                 onCopy={handleCopy}
                 onDelete={handleDelete}
                 onToggleSelect={handleToggleSelect}
@@ -258,6 +249,7 @@ const BookmarkLayout = () => {
                 copied={copiedBookmarkId === bookmark.id}
                 selected={selectedBookmarkIds.has(bookmark.id)}
                 duplicate={duplicatesIds.has(bookmark.id)}
+                showFolderPath={showFolderPath}
                 onCopy={handleCopy}
                 onDelete={handleDelete}
                 onToggleSelect={handleToggleSelect}

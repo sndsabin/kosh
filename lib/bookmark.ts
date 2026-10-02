@@ -3,7 +3,7 @@ import { browser } from "wxt/browser";
 import { getColor } from "./color";
 
 import type { Browser } from "#imports";
-import type { Bookmark, Folder, FolderTreeNode } from "@/types";
+import type { Bookmark, Folder } from "@/types";
 
 export async function getBookmarks() {
   const bookmarkNodes = await browser.bookmarks.getTree();
@@ -11,7 +11,7 @@ export async function getBookmarks() {
   const folders: Folder[] = [];
   const bookmarks: Bookmark[] = [];
 
-  function parseBookmark(node: Browser.bookmarks.BookmarkTreeNode) {
+  const parseBookmark = (node: Browser.bookmarks.BookmarkTreeNode) => {
     const isFolder = node.url === undefined;
 
     if (isFolder) {
@@ -35,7 +35,7 @@ export async function getBookmarks() {
     }
 
     node.children?.forEach((child) => parseBookmark(child));
-  }
+  };
 
   bookmarkNodes
     .flatMap((root) => root.children ?? []) // skip the root node
@@ -77,62 +77,20 @@ export function moveBookmark(id: string, parentId: string) {
   return browser.bookmarks.move(id, { parentId: parentId });
 }
 
-export function createFolder(name: string, parentId?: string) {
-  if (!name.trim()) {
-    return;
-  }
+export function getBookmarksByFolder(bookmarks: Bookmark[]) {
+  const bookmarkMap = new Map<string, Bookmark[]>();
 
-  return browser.bookmarks.create({
-    parentId: parentId,
-    title: name,
-  });
-}
+  bookmarks.forEach((bookmark) => {
+    const item = bookmarkMap.get(bookmark.folderId);
 
-export function renameFolder(id: string, name: string) {
-  if (!id || !name.trim()) {
-    return;
-  }
-
-  return browser.bookmarks.update(id, { title: name });
-}
-
-export function moveFolder(id: string, parentId: string) {
-  if (!id || !parentId || id === parentId) {
-    return;
-  }
-
-  return browser.bookmarks.move(id, { parentId: parentId });
-}
-
-export function removeFolder(id: string) {
-  if (!id) {
-    return;
-  }
-
-  return browser.bookmarks.removeTree(id);
-}
-
-export function buildFolderTree(folders: Folder[]) {
-  const foldersMap = new Map<string, FolderTreeNode>();
-
-  folders.forEach((folder) => {
-    foldersMap.set(folder.id, { ...folder, children: [] });
-  });
-
-  const data: FolderTreeNode[] = [];
-
-  folders.forEach((folder) => {
-    const folderData = foldersMap.get(folder.id)!;
-    const parent = folder.parentId ? foldersMap.get(folder.parentId) : null;
-
-    if (parent) {
-      parent.children.push(folderData);
+    if (item) {
+      item.push(bookmark);
     } else {
-      data.push(folderData);
+      bookmarkMap.set(bookmark.folderId, [bookmark]);
     }
   });
 
-  return data;
+  return bookmarkMap;
 }
 
 export function findDuplicates(bookmarks: Bookmark[]) {
@@ -161,38 +119,4 @@ export function findDuplicates(bookmarks: Bookmark[]) {
   });
 
   return duplicates;
-}
-
-export function getFolderSubtreeIds(id: string, folders: Folder[]) {
-  const ids: string[] = [];
-  const folderTree = buildFolderTree(folders);
-
-  function walk(nodes: FolderTreeNode[]) {
-    for (const node of nodes) {
-      if (node.id === id) {
-        collect(node);
-        return true; // stop searching for folder
-      }
-
-      if (walk(node.children)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  function collect(node: FolderTreeNode) {
-    if (node.id) {
-      ids.push(node.id);
-    }
-
-    for (const child of node.children) {
-      collect(child);
-    }
-  }
-
-  walk(folderTree);
-
-  return ids;
 }
