@@ -7,8 +7,9 @@ import { useBookmarkStore } from "../store/bookmarkStore";
 import logo from "@/assets/logo.svg";
 
 import { useDashboardStore } from "../store/dashboardStore";
-import { findDuplicates } from "@/lib/bookmark";
+
 import { buildFolderTree } from "@/lib/folder";
+import { findDuplicates } from "@/lib/bookmark";
 
 import SidebarItem from "./SidebarItem";
 
