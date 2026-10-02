@@ -153,6 +153,8 @@ const BookmarkLayout = () => {
     });
   };
 
+  const showFolderPath = [ALL_BOOKMARKS_FOLDER, DUPLICATES_FOLDER].includes(selectedFolder.id);
+
   useEffect(() => {
     setSelectedBookmarkIds(new Set()); // reset select bookmark ids
   }, [selectedFolder, query, sortMode, page]);
@@ -222,6 +224,7 @@ const BookmarkLayout = () => {
                 copied={copiedBookmarkId === bookmark.id}
                 selected={selectedBookmarkIds.has(bookmark.id)}
                 duplicate={duplicatesIds.has(bookmark.id)}
+                showFolderPath={showFolderPath}
                 onCopy={handleCopy}
                 onDelete={handleDelete}
                 onToggleSelect={handleToggleSelect}
@@ -246,6 +249,7 @@ const BookmarkLayout = () => {
                 copied={copiedBookmarkId === bookmark.id}
                 selected={selectedBookmarkIds.has(bookmark.id)}
                 duplicate={duplicatesIds.has(bookmark.id)}
+                showFolderPath={showFolderPath}
                 onCopy={handleCopy}
                 onDelete={handleDelete}
                 onToggleSelect={handleToggleSelect}

@@ -112,7 +112,7 @@ export function buildFoldersPath(folders: Folder[]) {
     const parentFolder = folder.parentId ? foldersById.get(folder.parentId) : null;
 
     const parentPath = parentFolder ? buildPath(parentFolder) : "";
-    const path = parentPath ? `${parentPath}/${folder.title}` : folder.title;
+    const path = parentPath ? `${parentPath} / ${folder.title}` : folder.title;
 
     paths.set(folder.id, path);
 

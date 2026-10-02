@@ -6,6 +6,8 @@ import { formatDate } from "@/lib/formatter";
 import { getDomainLabel, getHostName } from "@/lib/url";
 import { getFaviconUrl, getThumbnail } from "@/lib/image";
 
+import FolderPath from "./FolderPath";
+
 import { DRAG_TYPE_BOOKMARK } from "@/constants";
 
 import type { Bookmark } from "@/types";
@@ -15,6 +17,7 @@ interface Props {
   copied: boolean;
   selected: boolean;
   duplicate: boolean;
+  showFolderPath: boolean;
   onDelete: (id: string) => void;
   onCopy: (bookmark: Bookmark) => void;
   onToggleSelect: (id: string) => void;
@@ -25,6 +28,7 @@ const BookmarkCard = ({
   copied,
   selected,
   duplicate,
+  showFolderPath,
   onDelete,
   onCopy,
   onToggleSelect,
@@ -110,6 +114,13 @@ const BookmarkCard = ({
             #{getDomainLabel(bookmark.url)}
           </span>
         </div>
+
+        {showFolderPath && (
+          <FolderPath
+            folderId={bookmark.folderId}
+            className="text-ink-muted/80 dark:text-paper-muted/70 text-[10px]"
+          />
+        )}
 
         <div className="mt-auto flex items-center justify-between pt-1">
           <span className="text-ink-muted/70 dark:text-paper-muted/60 text-[11px]">

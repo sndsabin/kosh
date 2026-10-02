@@ -9,6 +9,7 @@ import {
   removeFolder,
   renameFolder,
   getFolderSubtreeIds,
+  buildFoldersPath,
 } from "@/lib/folder";
 
 import { type Folder, type Bookmark } from "@/types";
@@ -17,6 +18,7 @@ import { getColor } from "@/lib/color";
 interface BookmarkState {
   folders: Folder[];
   bookmarks: Bookmark[];
+  foldersPath: Map<string, string>;
   isImporting: boolean;
   isListenerIntialized: boolean;
 
@@ -36,20 +38,27 @@ interface BookmarkState {
 }
 
 const TIMEOUT_DELAY = 150;
-let refreshTimer: ReturnType<typeof setTimeout> | undefined;
-export const refreshBookmarkData = () => {
-  clearTimeout(refreshTimer);
 
-  refreshTimer = setTimeout(() => {
-    getBookmarks().then((data) => {
-      useBookmarkStore.setState({ folders: data.folders, bookmarks: data.bookmarks });
-    });
-  }, TIMEOUT_DELAY);
-};
+function createDebouncedRefresh(delay: number) {
+  let refreshTimer: ReturnType<typeof setTimeout> | undefined;
+
+  return () => {
+    clearTimeout(refreshTimer);
+
+    refreshTimer = setTimeout(() => {
+      getBookmarks().then((data) => {
+        useBookmarkStore.setState({ folders: data.folders, bookmarks: data.bookmarks });
+      });
+    }, delay);
+  };
+}
+
+export const refreshBookmarkData = createDebouncedRefresh(TIMEOUT_DELAY);
 
 export const useBookmarkStore = create<BookmarkState>()((set, get) => ({
   folders: [],
   bookmarks: [],
+  foldersPath: new Map(),
   isImporting: false,
   isListenerIntialized: false,
 
@@ -221,3 +230,11 @@ export const useBookmarkStore = create<BookmarkState>()((set, get) => ({
     }
   },
 }));
+
+useBookmarkStore.subscribe((state, prevState) => {
+  if (state.folders !== prevState.folders) {
+    useBookmarkStore.setState({
+      foldersPath: buildFoldersPath(state.folders),
+    });
+  }
+});
