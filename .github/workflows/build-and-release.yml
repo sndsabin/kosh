@@ -76,6 +76,8 @@ jobs:
           rm -rf .output/   # clean builds if any
           npm run zip
           npm run zip:firefox
+          npm run zip:edge
+          npm run zip:opera
 
         shell: bash
 
