@@ -3,12 +3,18 @@
 </p>
 
 <p align="center">
-  <a href="https://chromewebstore.google.com/detail/kosh-bookmark-manager/meldjdfnfgefeoegccphimkmgmeamcce">
+  <a href="https://chromewebstore.google.com/detail/kosh-bookmark-manager/meldjdfnfgefeoegccphimkmgmeamcce" target="_blank">
     <img src="https://img.shields.io/badge/Chrome%20Web%20Store-Available-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available on Chrome Web Store">
   </a>
   &nbsp;&nbsp;
-  <a href="https://addons.mozilla.org/en-US/firefox/addon/kosh/">
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/kosh/" target="_blank">
     <img src="https://img.shields.io/badge/Firefox-Available-FF7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white" alt="Available on Firefox Addons store">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://microsoftedge.microsoft.com/addons/detail/kosh-bookmark-manager/chfkgkbmegkalmcjlmmlaikmkckeinop" target="_blank">
+    <img
+    src="https://img.shields.io/badge/Edge-Available-6C5CE7?style=for-the-badge&logo=microsoftedge&logoColor=white"
+    alt="Available on Microsoft Edge Add-ons">
   </a>
 </p>
 
