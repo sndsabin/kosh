@@ -33,11 +33,13 @@ const Dashboard = ({ theme, onToggleTheme }: Props) => {
   const error = useDashboardStore((state) => state.error);
   const setError = useDashboardStore((state) => state.setError);
   const setIsSidebarOpen = useDashboardStore((state) => state.setIsSidebarOpen);
+  const intializeLayoutViewMode = useDashboardStore((state) => state.initailizeViewMode);
 
   const initializeBookmarks = useBookmarkStore((state) => state.initalize);
 
   useEffect(() => {
     setIsLoading(true);
+    intializeLayoutViewMode();
     initializeBookmarks()
       .catch((err: unknown) => {
         setError(err instanceof Error ? err.message : "failed to load bookmarks");

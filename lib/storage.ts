@@ -1,10 +1,11 @@
 import { storage } from "#imports";
-import { THEME_MODE_DARK, THEME_MODE_LIGHT } from "@/constants";
+import { THEME_MODE_DARK, THEME_MODE_LIGHT, VIEW_MODE_GRID, VIEW_MODE_LIST } from "@/constants";
 
-import type { Theme } from "@/types";
+import type { Theme, ViewMode } from "@/types";
 
 const THEME_STORAGE_KEY = "local:koshTheme";
 const BANNER_STORAGE_KEY = "local:koshBanner";
+const VIEW_MODE_STORAGE_KEY = "local:koshViewMode";
 
 export async function getTheme() {
   const theme = await storage.getItem(THEME_STORAGE_KEY);
@@ -20,6 +21,16 @@ export async function getTheme() {
 
 export async function setTheme(theme: Theme) {
   return storage.setItem(THEME_STORAGE_KEY, theme);
+}
+
+export async function getViewMode(): Promise<ViewMode> {
+  const viewMode = await storage.getItem(VIEW_MODE_STORAGE_KEY);
+
+  return viewMode === VIEW_MODE_LIST ? VIEW_MODE_LIST : VIEW_MODE_GRID;
+}
+
+export async function setViewMode(viewMode: ViewMode) {
+  return storage.setItem(VIEW_MODE_STORAGE_KEY, viewMode);
 }
 
 export async function isBannerEnabled(): Promise<boolean> {

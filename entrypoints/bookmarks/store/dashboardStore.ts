@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+import { getViewMode, setViewMode as setViewModeToStorage } from "@/lib/storage";
 import { ALL_BOOKMARKS_FOLDER, SORT_MODE_RECENT, VIEW_MODE_GRID } from "@/constants";
 
 import type { SortMode, ViewMode } from "@/types";
@@ -24,6 +25,7 @@ interface DashboardState {
   toggleSidebar: () => void;
   setIsSidebarOpen: (isOpen: boolean) => void;
   setSelectedFolder: (id: string, name: string) => void;
+  initailizeViewMode: () => void;
 }
 
 export const useDashboardStore = create<DashboardState>()((set) => ({
@@ -39,9 +41,16 @@ export const useDashboardStore = create<DashboardState>()((set) => ({
 
   setError: (err: string | null) => set({ error: err }),
   setQuery: (query: string) => set({ query: query }),
-  setViewMode: (mode: ViewMode) => set({ viewMode: mode }),
+  setViewMode: (mode: ViewMode) => {
+    setViewModeToStorage(mode);
+    set({ viewMode: mode });
+  },
   setSortMode: (mode: SortMode) => set({ sortMode: mode }),
   setIsSidebarOpen: (isOpen: boolean) => set({ isSidebarOpen: isOpen }),
   toggleSidebar: () => set((prev) => ({ isSidebarOpen: !prev.isSidebarOpen })),
   setSelectedFolder: (id: string, name: string) => set({ selectedFolder: { id: id, name: name } }),
+  initailizeViewMode: async () => {
+    const viewMode = await getViewMode();
+    set({ viewMode: viewMode });
+  },
 }));
