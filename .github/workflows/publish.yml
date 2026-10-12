@@ -39,16 +39,17 @@ jobs:
 
           VERSION="${TAG#v}"
 
+          echo "Release tag: $TAG"
           echo "Release version: $VERSION"
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
 
       - name: Download latest release assets
         run: |
           mkdir -p release-assets
 
-          gh release download \
+          gh release download "$TAG" \
             --repo "${{ github.repository }}" \
-            --latest \
             --dir release-assets
 
       - name: Show release assets
