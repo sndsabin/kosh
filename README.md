@@ -101,6 +101,24 @@ make zip-firefox
 
 The generated extension files are placed in WXT's output directory.
 
+## Sponsors
+
+This project is supported by these kind people.
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/marcomaroni-github" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/166719395" style="border-radius: 50%" width="100" alt="Marco Maroni" /><br />
+        <sub><b>Marco Maroni</b></sub>
+      </a><br />
+      <sub>🥪 Breakfast Sponsor</sub>
+    </td>
+  </tr>
+</table>
+
+[❤️ Become a sponsor](https://github.com/sponsors/sndsabin)
+
 ## Contributing
 
 Contributions, feature requests, and bug reports are welcome. Feel free to open an issue or submit a pull request.
