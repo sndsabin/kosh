@@ -2,7 +2,7 @@
   "name": "kosh",
   "description": "Modern, clean, and lightweight UI for your browser’s built-in bookmark manager.",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "scripts": {
     "dev": "wxt",
