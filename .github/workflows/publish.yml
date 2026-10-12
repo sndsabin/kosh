@@ -59,6 +59,10 @@ jobs:
 
       - name: Publish to stores
         run: |
+          set -euo pipefail
+
+          export CHROME_SERVICE_ACCOUNT_PRIVATE_KEY="${CHROME_SERVICE_ACCOUNT_PRIVATE_KEY//\\n/$'\n'}"
+
           npx wxt submit \
             --chrome-zip "release-assets/kosh-${VERSION}-chrome.zip" \
             --edge-zip "release-assets/kosh-${VERSION}-edge.zip" \
