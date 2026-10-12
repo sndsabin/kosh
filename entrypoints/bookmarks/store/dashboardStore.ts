@@ -25,7 +25,7 @@ interface DashboardState {
   toggleSidebar: () => void;
   setIsSidebarOpen: (isOpen: boolean) => void;
   setSelectedFolder: (id: string, name: string) => void;
-  initailizeViewMode: () => void;
+  initializeViewMode: () => void;
 }
 
 export const useDashboardStore = create<DashboardState>()((set) => ({
@@ -49,7 +49,7 @@ export const useDashboardStore = create<DashboardState>()((set) => ({
   setIsSidebarOpen: (isOpen: boolean) => set({ isSidebarOpen: isOpen }),
   toggleSidebar: () => set((prev) => ({ isSidebarOpen: !prev.isSidebarOpen })),
   setSelectedFolder: (id: string, name: string) => set({ selectedFolder: { id: id, name: name } }),
-  initailizeViewMode: async () => {
+  initializeViewMode: async () => {
     const viewMode = await getViewMode();
     set({ viewMode: viewMode });
   },

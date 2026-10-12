@@ -33,7 +33,7 @@ const Dashboard = ({ theme, onToggleTheme }: Props) => {
   const error = useDashboardStore((state) => state.error);
   const setError = useDashboardStore((state) => state.setError);
   const setIsSidebarOpen = useDashboardStore((state) => state.setIsSidebarOpen);
-  const intializeLayoutViewMode = useDashboardStore((state) => state.initailizeViewMode);
+  const intializeLayoutViewMode = useDashboardStore((state) => state.initializeViewMode);
 
   const initializeBookmarks = useBookmarkStore((state) => state.initalize);
 
